@@ -1,0 +1,35 @@
+name: Sugerir uma melhoria
+description: Uma ideia para o LimitGadget
+title: "[Ideia] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qual problema isso resolve
+      description: Conte a situação em que você sentiu falta disso.
+    validations:
+      required: true
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Como você imagina a solução
+    validations:
+      required: true
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas que você considerou
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Provedor novo
+        - Interface do gadget
+        - Configurações
+        - Avisos e notificações
+        - Instalador e atualização
+        - Outra
+    validations:
+      required: true

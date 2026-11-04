@@ -1,135 +1,170 @@
-# LimitGadget
+<p align="center">
+  <img src="icons/128x128.png" alt="Ícone do LimitGadget" width="96" height="96">
+</p>
 
-Um gadget leve para a barra de tarefas do Windows que mostra seus limites de uso nas ferramentas de IA:
+<h1 align="center">LimitGadget</h1>
 
-- **Claude Code** — cota semanal via `api.anthropic.com/api/oauth/usage`
-- **ChatGPT / Codex** — `chatgpt.com/backend-api/wham/usage`
-- **Antigravity** — lido localmente quando a IDE está aberta
+<p align="center">
+  Os limites de uso das suas IAs, sempre à vista na barra de tarefas do Windows.<br>
+  Claude, ChatGPT/Codex, GitHub Copilot e Antigravity em um só lugar.
+</p>
 
-## Requisitos
+<p align="center">
+  <a href="https://github.com/brunocsilva41/limit-gadget/actions/workflows/ci.yml"><img src="https://github.com/brunocsilva41/limit-gadget/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/brunocsilva41/limit-gadget/releases/latest"><img src="https://img.shields.io/github/v/release/brunocsilva41/limit-gadget?label=vers%C3%A3o&color=e8805c" alt="Última versão"></a>
+  <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-2d2d32" alt="Windows 10 e 11">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/licen%C3%A7a-MIT-2d2d32" alt="Licença MIT"></a>
+</p>
 
-- **Rust 1.80+** (`rustup update`)
-- **Node.js 20+** e **npm** (`nvm` recomendado)
-- **WebView2 Runtime** (já incluso no Windows 10/11 moderno)
-- **Tauri CLI**: `cargo install tauri-cli --version "^2"`
+<p align="center">
+  <img src="docs/screenshots/cena.png" alt="Gadget com os limites de cada provedor e a janela de configurações" width="860">
+</p>
 
-## Configuração inicial
+<p align="center"><sub>Capturas com dados de exemplo.</sub></p>
 
-```bash
-cd limit-gadget
-npm install
-```
+## Por que usar
 
-### Tokens de ambiente (não comite!)
+Cada ferramenta de IA tem o seu próprio limite (por sessão, por semana, por mês) e cada uma o mostra num lugar diferente. O LimitGadget junta tudo numa leitura rápida: um **anel de porcentagem** por provedor, o tempo até o limite renovar e um aviso antes de você ser pego de surpresa.
 
-Crie um arquivo `.env` na raiz ou defina as variáveis no sistema:
+- **Quatro provedores:** Claude, ChatGPT/Codex, GitHub Copilot e Antigravity.
+- **Três formas de exibir:** barra sobre a barra de tarefas, lista Mini flutuante ou painel Normal com detalhes.
+- **Anéis de porcentagem** que ficam âmbar e vermelhos conforme o limite se aproxima.
+- **Previsão de esgotamento:** "no ritmo atual, acaba em 2d 20h".
+- **Uso por projeto** no Claude Code e **últimas sessões dos 7 dias** no ChatGPT/Codex e no Copilot.
+- **Avisos** ao passar dos níveis de atenção e crítico, quando o limite renova, meta de consumo por dia e resumo semanal.
+- **Atalho global** `Ctrl+Alt+L` para mostrar ou ocultar.
+- **Leve e privado:** sem telemetria, nenhum dado sai do seu computador, fora as consultas de cada provedor à própria API dele.
 
-```bash
-# .env (NÃO commitar)
-CLAUDE_CODE_TOKEN=seu_access_token_aqui
-CHATGPT_TOKEN=seu_access_token_aqui
-CHATGPT_ACCOUNT_ID=seu_account_id_aqui
-```
+## Como fica
 
-> **Como obter os tokens:**
-> - **Claude Code**: `~/.claude/.credentials.json` → `claudeAiOauth.accessToken`
-> - **ChatGPT**: `~/.codex/auth.json` → `tokens.access_token` e `tokens.account_id`
+### Barra na barra de tarefas
 
-O app **não salva tokens** no código — eles ficam apenas nas variáveis de ambiente do processo.
+Uma faixa que encosta na bandeja do Windows, com a cor real da barra de tarefas. Dá para soltar o pino e arrastá-la pela barra, ou usar a versão compacta, com setas para alternar entre os provedores.
+
+<p align="center">
+  <img src="docs/screenshots/barra.png" alt="Barra com os quatro provedores sobre a barra de tarefas" width="826">
+</p>
+
+### Mini e Normal
+
+<table>
+  <tr>
+    <td align="center" valign="top"><img src="docs/screenshots/mini.png" alt="Modo Mini em lista" width="254"><br><sub>Mini: uma lista discreta</sub></td>
+    <td align="center" valign="top"><img src="docs/screenshots/normal-claude.png" alt="Modo Normal com o Claude expandido" width="358"><br><sub>Normal: limites, projetos e histórico</sub></td>
+  </tr>
+</table>
+
+### Sessões recentes e consumo
+
+Cada provedor abre com os seus detalhes. As seções de projetos e de sessões podem ser recolhidas.
+
+<table>
+  <tr>
+    <td align="center" valign="top"><img src="docs/screenshots/normal-chatgpt.png" alt="ChatGPT com as sessões dos últimos 7 dias" width="358"><br><sub>ChatGPT/Codex</sub></td>
+    <td align="center" valign="top"><img src="docs/screenshots/normal-copilot.png" alt="Copilot com créditos e sessões dos últimos 7 dias" width="358"><br><sub>GitHub Copilot</sub></td>
+  </tr>
+</table>
+
+### Configurações
+
+Janela translúcida com abas por categoria.
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/config-aparencia.png" alt="Aba Aparência" width="300"><br><sub>Aparência</sub></td>
+    <td align="center"><img src="docs/screenshots/config-provedores.png" alt="Aba Provedores" width="300"><br><sub>Provedores</sub></td>
+    <td align="center"><img src="docs/screenshots/config-barra.png" alt="Aba Barra" width="300"><br><sub>Barra</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/config-avisos.png" alt="Aba Avisos" width="300"><br><sub>Avisos</sub></td>
+    <td align="center"><img src="docs/screenshots/config-sistema.png" alt="Aba Sistema" width="300"><br><sub>Sistema</sub></td>
+    <td></td>
+  </tr>
+</table>
+
+## Instalação
+
+1. Baixe o instalador `LimitGadget_<versão>_x64-setup.exe` na [última release](https://github.com/brunocsilva41/limit-gadget/releases/latest).
+2. Execute-o. A instalação é só para o seu usuário e não pede administrador.
+3. Abra o LimitGadget. Ele aparece na bandeja e, no modo Barra, ao lado dela.
+
+> **Aviso do Windows:** o instalador ainda não tem certificado de assinatura de código, então o SmartScreen pode mostrar "O Windows protegeu o seu PC". Clique em **Mais informações** e depois em **Executar assim mesmo**. O instalador é gerado pela pipeline deste repositório, e o código está aberto para conferência.
+
+**Requisitos:** Windows 10 ou 11 (x64) e o WebView2 Runtime, que já vem no Windows moderno.
+
+### De onde vêm os dados
+
+O LimitGadget usa o login que você já tem em cada ferramenta. Não pede senha nem token.
+
+| Provedor | Precisa de | O que mostra |
+| --- | --- | --- |
+| Claude | Estar logado no Claude Code | Sessão de 5 h, semana, modelos e uso extra |
+| ChatGPT/Codex | Estar logado no Codex (`codex login`) | Janelas de uso do plano |
+| GitHub Copilot | Estar logado no GitHub (`gh auth login`) | Créditos premium do mês |
+| Antigravity | A IDE aberta | Cota por modelo (com a IDE fechada, mostra a última leitura) |
+
+As credenciais são lidas dos arquivos locais de cada ferramenta e enviadas **somente** à API do próprio provedor. O app guarda apenas as suas configurações, o histórico de uso e o último valor lido, em `%APPDATA%\LimitGadget`.
+
+### Atualizações
+
+O app verifica sozinho, a cada 6 horas, se há uma versão nova nas [releases do GitHub](https://github.com/brunocsilva41/limit-gadget/releases), avisa por notificação e instala com um clique em **Configurações > Sistema**. As atualizações são assinadas e o app só aceita as que batem com a chave pública embutida nele.
 
 ## Desenvolvimento
 
-```bash
-npm run tauri:dev
-```
-
-Isso abre a janela do painel + ícone na bandeja. O loop de 60 s roda em background.
-
-## Build de produção
+**Pré-requisitos:** [Rust](https://rustup.rs) (estável), [Node.js](https://nodejs.org) 20.19 ou mais e o WebView2 Runtime.
 
 ```bash
-npm run tauri:build
+npm ci
+npm run tauri:dev      # abre o app em modo de desenvolvimento
 ```
 
-Gera um `.msi` e `.exe` em `src-tauri/target/release/bundle/`.
+```bash
+npm run typecheck      # TypeScript
+npm test               # testes do frontend (vitest)
+cd src-tauri
+cargo fmt --check
+cargo clippy --all-targets -- -D warnings
+cargo test             # testes do Rust
+```
 
-## Releases e atualizações
+```bash
+npm run tauri:build    # gera o instalador em src-tauri/target/release/bundle/nsis
+```
 
-O app se atualiza pelas releases do GitHub: o plugin updater do Tauri lê
-`https://github.com/<dono>/<repo>/releases/latest/download/latest.json`.
-
-### Como publicar
-
-1. Atualize a versão (X.Y.Z) nos 3 arquivos: `package.json`, `src-tauri/Cargo.toml` e `src-tauri/tauri.conf.json`.
-2. Em `CHANGELOG.md`, mova o conteúdo de `[Unreleased]` para uma seção `[X.Y.Z]`.
-3. Faça merge na `main` e crie a tag na `main`: `git tag vX.Y.Z` e `git push origin vX.Y.Z`.
-
-A tag dispara `.github/workflows/release.yml`, que:
-
-1. Roda todo o CI (consistência, frontend, Rust, segurança e pacote). Se qualquer etapa falhar, nada é publicado.
-2. Confirma que o commit da tag está na `main` e que a tag bate com a versão.
-3. Extrai as notas da seção do `CHANGELOG.md` (falha se não existir).
-4. Compila, assina e publica a Release com o instalador NSIS, o `.sig` e o `latest.json`.
-
-Comandos úteis: `npm run check:versions`, `npm run typecheck`, `npm test`.
-
-### Segredos necessários
-
-Em GitHub > Settings > Secrets and variables > Actions > New repository secret:
-
-- `TAURI_SIGNING_PRIVATE_KEY`: conteúdo do arquivo da chave privada do updater.
-- `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`: senha da chave (se a chave não tem senha, não cadastre este segredo).
-
-### Proteção de branch
-
-Recomendado: em Settings > Branches, proteja a `main` exigindo pull request e as etapas do CI
-(Consistência, Frontend, Rust, Segurança e Pacote) como checagens obrigatórias.
-
-## Estrutura
+### Estrutura
 
 ```
 limit-gadget/
-├── src/                    # Frontend React + Tailwind
-│   ├── App.tsx             # Painel compacto (280×170)
-│   ├── main.tsx
-│   ├── index.css
-│   ├── adapters/
-│   │   ├── api.ts          # HTTP fetchers (front-end helpers)
-│   │   └── storage.ts      # Cache local
-│   └── components/
-│       └── Icons.tsx       # SVGs inline
-├── src-tauri/              # Backend Rust
-│   ├── Cargo.toml
-│   ├── tauri.conf.json
-│   ├── build.rs
+├── src/                 # Interface (React + TypeScript): gadget, anéis, configurações em abas
+├── src-tauri/           # App (Rust + Tauri)
 │   └── src/
-│       ├── lib.rs          # Adapters + comandos Tauri + loop 60s
-│       └── main.rs
-├── icons/                  # Ícones multi-res (PNG + SVG)
-├── package.json
-├── vite.config.ts
-├── tailwind.config.cjs
-└── tsconfig.json
+│       ├── lib.rs           # janelas, bandeja, comandos e laço de atualização
+│       ├── providers.rs     # consulta de cada provedor
+│       ├── insights.rs      # histórico, previsão, metas e avisos
+│       ├── claude_logs.rs   # uso do Claude Code por projeto
+│       ├── session_logs.rs  # sessões recentes do Codex e do Copilot
+│       ├── win.rs           # integração com a barra de tarefas do Windows
+│       └── demo.rs          # dados de exemplo (modo demonstração)
+├── icons/               # ícone do app e script que o gera
+├── installer/           # instalador NSIS (textos, imagens e ganchos)
+├── scripts/             # verificação de versões, publicação e capturas de tela
+├── docs/screenshots/    # imagens usadas neste README
+├── legacy/              # protótipos da primeira versão (só histórico)
+└── .github/             # CI, release, Dependabot e modelos de issue e PR
 ```
 
-## Comportamento
+### Modo demonstração e capturas de tela
 
-- **Ícone na bandeja**: anel colorido (verde/âmbar/vermelho) = pior % entre as 3 fontes
-- **Clique no ícone**: abre/fecha o painel **colado à barra de tarefas**, acima do relógio
-- **Painel**: 3 linhas — ícone minúsculo + nome + % grande + barra fina + "reseta em Xh Ym"
-- **Atualização**: a cada 60 s (paralelo, timeout 10 s, backoff exponencial em falha)
-- **Notificação nativa**: dispara uma vez ao atingir **≥ 90%**, re-arma ao cair **< 85%** ou no reset
-- **Cache**: último snapshot salvo em `%APPDATA%\LimitGadget\store.json` (sobrevive a reinício)
-- **Consumo**: ~30–40 MB RAM, ~0% CPU ocioso, ~1 MB rede/dia
+Com `LIMITGADGET_DEMO=1` o app mostra dados fictícios e não faz nenhuma consulta de rede. O script `scripts/capture-docs.ps1` usa esse modo, sobre um fundo neutro e numa pasta de dados temporária, para gerar as imagens de `docs/screenshots` sem expor nada pessoal.
 
-## Roadmap
+## Releases
 
-- [ ] Adapter Antigravity completo (CSRF → language_server local)
-- [ ] Ícone animado (SVG dinâmico via `tauri::tray`)
-- [ ] Modo compacto (só 3 argolas no painel)
-- [ ] Auto-start no Windows (entrada em `Run`)
-- [ ] Tema claro/escuro automático
+Uma release só nasce de uma **tag** `vX.Y.Z` na `main`, e só se todas as etapas do CI passarem. O fluxo completo está em [CONTRIBUTING.md](CONTRIBUTING.md#publicar-uma-release). O histórico de mudanças fica no [CHANGELOG](CHANGELOG.md).
+
+## Contribuindo
+
+Contribuições são bem-vindas. Leia o [CONTRIBUTING.md](CONTRIBUTING.md) antes de abrir uma PR e use os modelos de [issue](https://github.com/brunocsilva41/limit-gadget/issues/new/choose). Para falhas de segurança, veja o [SECURITY.md](SECURITY.md).
 
 ## Licença
 
-MIT
+[MIT](LICENSE)

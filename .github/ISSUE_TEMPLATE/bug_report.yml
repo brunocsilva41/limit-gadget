@@ -1,0 +1,75 @@
+name: Relatar um problema
+description: Algo não funciona como deveria
+title: "[Problema] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudar! **Não cole tokens, conteúdo de conversas, nomes de projetos reais nem caminhos de pastas pessoais.** Para capturas de tela, use o modo demonstração (`LIMITGADGET_DEMO=1`).
+  - type: textarea
+    id: descricao
+    attributes:
+      label: O que aconteceu
+      description: Descreva o problema com suas palavras.
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+      placeholder: |
+        1. Abra o gadget no modo ...
+        2. Clique em ...
+        3. Veja que ...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que você esperava
+    validations:
+      required: true
+  - type: input
+    id: versao
+    attributes:
+      label: Versão do LimitGadget
+      description: Em Configurações > Sistema, ou no nome do instalador.
+      placeholder: "0.5.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: windows
+    attributes:
+      label: Versão do Windows
+      options:
+        - Windows 11
+        - Windows 10
+        - Outra
+    validations:
+      required: true
+  - type: dropdown
+    id: modo
+    attributes:
+      label: Modo em uso
+      options:
+        - Normal
+        - Mini
+        - Barra
+        - Não se aplica
+  - type: dropdown
+    id: provedor
+    attributes:
+      label: Provedor afetado
+      options:
+        - Claude
+        - ChatGPT/Codex
+        - GitHub Copilot
+        - Antigravity
+        - Todos
+        - Nenhum em especial
+  - type: textarea
+    id: extras
+    attributes:
+      label: Capturas de tela ou observações
+      description: Pode arrastar imagens para cá. Apague qualquer informação pessoal antes.

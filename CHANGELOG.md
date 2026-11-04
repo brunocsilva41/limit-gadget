@@ -5,6 +5,17 @@ O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e 
 
 ## [Unreleased]
 
+### Adicionado
+
+- Modo demonstração (`LIMITGADGET_DEMO=1`) com dados fictícios e sem consultas de rede, usado para gerar as capturas de tela.
+- README refeito, com capturas de tela, instruções de instalação e a origem dos dados de cada provedor.
+- LICENSE (MIT), CONTRIBUTING, SECURITY e modelos de issue para relato de problemas e sugestões.
+- A página de cada release ganha um cabeçalho com imagem, instruções de instalação e o aviso do SmartScreen.
+
+### Corrigido
+
+- Quadrado cinza no canto inferior direito da janela de configurações.
+
 ### Alterado
 
 - Dependências atualizadas: React 19, Vite 8, TypeScript 7, vitest 5 e windows-sys 0.61.

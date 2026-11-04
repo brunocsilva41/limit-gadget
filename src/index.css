@@ -425,3 +425,7 @@ body.settings-body, html:has(body.settings-body), body.settings-body #root { bac
 .psess { padding: 4px 0; }
 .psmain { display: flex; align-items: baseline; gap: 8px; font-size: 11.5px; }
 .pssub { font-size: 10.5px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* sem o quadrado cinza do canto da barra de rolagem */
+.pane { overflow-x: hidden; }
+.pane::-webkit-scrollbar-corner { background: transparent; }

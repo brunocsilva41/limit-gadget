@@ -124,7 +124,7 @@ fn home() -> Option<String> {
     std::env::var("USERPROFILE").or_else(|_| std::env::var("HOME")).ok()
 }
 
-fn iso_from_epoch(secs: i64) -> String {
+pub fn iso_from_epoch(secs: i64) -> String {
     let days = secs.div_euclid(86400);
     let rem = secs.rem_euclid(86400);
     let z = days + 719468;
