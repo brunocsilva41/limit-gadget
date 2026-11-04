@@ -1,0 +1,26 @@
+# dependências e saídas de build
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/schemas/
+dist-update/
+releases/
+*.tsbuildinfo
+
+# segredos
+*.key
+*.key.pub
+.env
+.env.*
+!.env.example
+
+# sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+__pycache__/
+
+# exportações de conversa e anotações locais
+src-tauri/20??-??-??-*.txt
