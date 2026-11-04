@@ -5,6 +5,16 @@ O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e 
 
 ## [Unreleased]
 
+### Alterado
+
+- Dependências atualizadas: React 19, Vite 8, TypeScript 7, vitest 5 e windows-sys 0.61.
+- Ações do GitHub atualizadas, e a publicação usa o tauri-action v1 (`uploadUpdaterJson`).
+- O Dependabot agrupa React e Vite com suas peças relacionadas, para não abrir PRs que quebram a instalação.
+
+### Removido
+
+- Dependências sem uso (plugins JS do Tauri, Tailwind, PostCSS e Autoprefixer).
+
 ## [0.5.0] - 2026-11-04
 
 ### Adicionado
