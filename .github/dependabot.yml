@@ -5,6 +5,11 @@ updates:
     schedule:
       interval: weekly
     groups:
+      # Peças que só funcionam juntas entram na mesma PR, mesmo em versão maior.
+      react:
+        patterns: ["react", "react-dom", "@types/react", "@types/react-dom"]
+      vite:
+        patterns: ["vite", "vitest", "@vitejs/*"]
       npm-minor-patch:
         update-types: [minor, patch]
   - package-ecosystem: cargo
