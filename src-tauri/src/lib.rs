@@ -1,4 +1,5 @@
 mod claude_logs;
+mod demo;
 mod insights;
 mod providers;
 mod session_logs;
@@ -249,8 +250,9 @@ async fn refresh(app: &AppHandle, client: &reqwest::Client) -> bool {
     {
         let locals_state = app.state::<LocalsState>();
         let mut loc = locals_state.0.lock().await;
+        let demo = std::env::var_os("LIMITGADGET_DEMO").is_some();
         for (id, name) in ALL {
-            if !enabled.iter().any(|e| e == id) {
+            if demo || !enabled.iter().any(|e| e == id) {
                 continue;
             }
             let res = match id {
@@ -396,6 +398,11 @@ async fn refresh(app: &AppHandle, client: &reqwest::Client) -> bool {
                 let _ = app.notification().builder().title(title).body(body).show();
             }
         }
+    }
+
+    if std::env::var_os("LIMITGADGET_DEMO").is_some() {
+        // modo demonstração: dados de exemplo, sem rede (usado nas capturas de tela da documentação)
+        list = demo::providers(now_ms(), &enabled);
     }
 
     save_cache(&list);
